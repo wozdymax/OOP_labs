@@ -35,6 +35,7 @@ std::optional<Args> ParseArgs(int argc, char* argv[])
 	}
 	if (argc != 3)
 	{
+		PrintHelp();
 		return std::nullopt;
 	}
 
@@ -70,9 +71,9 @@ std::optional<int> ConvertBinToDec(const std::string& strBinNumber)
 		return std::nullopt;
 	}
 
-	for (int i = 0; i < binLength; i++)
+	for (char bit : strBinNumber)
 	{
-		number += (strBinNumber[i] - '0') * std::pow(2, binLength - i - 1);
+		number = (number << 1) | (bit - '0');
 	}
 
 	return number;
@@ -116,13 +117,15 @@ void Convert(const Args& args)
 int main(int argc, char* argv[])
 {
 	std::optional<Args> args = ParseArgs(argc, argv);
-	if (!args)
+	if (argc != 2 && argv[1] != "-h")
 	{
-		std::cout << "ERROR";
-		return 1;
+		if (!args)
+		{
+			std::cout << "ERROR";
+			return 1;
+		}
+		Convert(*args);
 	}
-
-	Convert(*args);
 
 	return 0;
 }
