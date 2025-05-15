@@ -5,12 +5,7 @@
 #include <algorithm>
 #include <cmath>
 
-struct Args
-{
-	std::string inputFile;
-	std::string outputFile;
-	bool isStdIn = false;
-};
+const std::string ERROR = "ERROR";
 
 void PrintHelp()
 {
@@ -19,29 +14,28 @@ void PrintHelp()
 		<< "  -h  Show this help message\n"
 		<< "If no arguments are provided, input is read from stdin and output is printed to console.\n";
 }
-
-std::optional<Args> ParseArgs(int argc, char* argv[])
+ 
+std::string ParseArgs(int argc, char* argv[])
 {
-	Args result;
+	std::string strNum;
 	if (argc == 1)
 	{
-		result.isStdIn = true;
-		return result;
+		std::cin >> strNum;
 	}
-	if ((argc == 2) && (std::string(argv[1]) == "-h"))
+	if (argc == 2)
 	{
-		PrintHelp();
-		return std::nullopt;
+		strNum = std::string(argv[1]); 
+		if (std::string(argv[1]) == "-h")
+		{
+			PrintHelp();
+		}
 	}
-	if (argc != 3)
+	if (argc > 2)
 	{
-		return std::nullopt;
+		throw std::runtime_error(ERROR);
 	}
 
-	result.inputFile = argv[1];
-	result.outputFile = argv[2];
-
-	return result;
+	return strNum;
 }
 
 bool IsBinNumber(const std::string& strBinNumber)
@@ -56,18 +50,18 @@ bool IsBinNumber(const std::string& strBinNumber)
 	return true;
 }
 
-std::optional<int> ConvertBinToDec(const std::string& strBinNumber)
+void ConvertBinToDec(const std::string& strBinNumber)
 {
 	if (!IsBinNumber(strBinNumber))
 	{
-		return std::nullopt; 
+		throw std::runtime_error(ERROR);
 	}
 
 	int number = 0;
 	int binLength = strBinNumber.length();
 	if (binLength >= 32)
 	{
-		return std::nullopt;
+		throw std::runtime_error(ERROR);
 	}
 
 	for (char bit : strBinNumber)
@@ -75,55 +69,23 @@ std::optional<int> ConvertBinToDec(const std::string& strBinNumber)
 		number = (number << 1) | (bit - '0');
 	}
 
-	return number;
-}
-
-void Convert(const Args& args)
-{
-	std::ifstream inputFile;
-	std::ofstream outputFile;
-	std::istream& input = (args.isStdIn ? std::cin : inputFile);
-	std::ostream& output = (args.isStdIn ? std::cout : outputFile);
-	
-	if (!args.isStdIn)
-	{
-		inputFile.open(args.inputFile);
-		if (!inputFile.is_open())
-		{
-			std::cerr << "Can`t open input file!";
-			return;
-		}
-		outputFile.open(args.outputFile);
-		if (!outputFile.is_open())
-		{
-			std::cerr << "Can`t open output file!";
-			return;
-		}
-	}
-
-	std::string binNumber;
-	input >> binNumber;
-
-	std::optional<int> number = ConvertBinToDec(binNumber);
-	if(!number)
-	{
-		output << "ERROR";
-		return;
-	}
-	output << *number;
+	std::cout << number;
 }
 
 int main(int argc, char* argv[])
 {
-	std::optional<Args> args = ParseArgs(argc, argv);
-	if (argc != 2 && argv[1] != "-h")
+	try
 	{
-		if (!args)
+		std::string binNum = ParseArgs(argc, argv);
+		if (binNum != "-h")
 		{
-			std::cout << "ERROR";
-			return 1;
+			ConvertBinToDec(binNum);
 		}
-		Convert(*args);
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what();
+		return 1;
 	}
 
 	return 0;

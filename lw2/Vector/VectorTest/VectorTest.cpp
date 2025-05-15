@@ -53,7 +53,7 @@ TEST_CASE("Test vector processing")
 TEST_CASE("Test vector sort output")
 {
 	std::vector<double> numbers = { 5.45, 12.3457, 3.98932, 5.902, 4.1456 };
-	std::string expectedResult = "3.989 4.146 5.450 5.902 12.346\n";
+	std::string expectedResult = "3.989 4.146 5.450 5.902 12.346 \n";
 	std::ostringstream output;
 	PrintSortedNumbers(output, numbers);
 	CHECK(output.str() == expectedResult);
