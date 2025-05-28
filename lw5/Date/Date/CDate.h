@@ -41,14 +41,12 @@ public:
     bool operator>= (const CDate& rhs) const;
     bool operator> (const CDate& rhs) const;
 
+    unsigned GetDay() const;
+    Month GetMonth() const;
+    unsigned GetYear() const;
+    WeekDay GetWeekDay() const;
 
-
-    unsigned GetDay()const;
-    Month GetMonth()const;
-    unsigned GetYear()const;
-    WeekDay GetWeekDay()const;
-
-    bool IsValid()const;
+    bool IsValid() const;
 
 private:
     unsigned m_timestamp;
