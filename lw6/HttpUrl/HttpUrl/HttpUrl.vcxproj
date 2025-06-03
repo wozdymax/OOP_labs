@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{0a93d96e-9980-4b69-b0e9-60434697567c}</ProjectGuid>
-    <RootNamespace>ShapesTests</RootNamespace>
+    <ProjectGuid>{d04b0ff5-66cc-4efc-98e9-c056fbe39bd7}</ProjectGuid>
+    <RootNamespace>HttpUrl</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -77,7 +77,6 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>..\..\..\catch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -93,7 +92,6 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>..\..\..\catch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -109,7 +107,6 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>..\..\..\catch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,7 +122,6 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>..\..\..\catch;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,26 +131,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Shapes\CBaseShape.cpp" />
-    <ClCompile Include="..\Shapes\CCircle.cpp" />
-    <ClCompile Include="..\Shapes\CLineSegment.cpp" />
-    <ClCompile Include="..\Shapes\CPoint.cpp" />
-    <ClCompile Include="..\Shapes\CRectangle.cpp" />
-    <ClCompile Include="..\Shapes\CTriangle.cpp" />
-    <ClCompile Include="..\Shapes\ShapeController.cpp" />
-    <ClCompile Include="ShapesTests.cpp" />
+    <ClCompile Include="CHttpUrl.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Shapes\CBaseShape.h" />
-    <ClInclude Include="..\Shapes\CCircle.h" />
-    <ClInclude Include="..\Shapes\CLineSegment.h" />
-    <ClInclude Include="..\Shapes\CPoint.h" />
-    <ClInclude Include="..\Shapes\CRectangle.h" />
-    <ClInclude Include="..\Shapes\CTriangle.h" />
-    <ClInclude Include="..\Shapes\IShape.h" />
-    <ClInclude Include="..\Shapes\ISolidShape.h" />
-    <ClInclude Include="..\Shapes\ShapeController.h" />
-    <ClInclude Include="..\Shapes\UtilityFunctions.h" />
+    <ClInclude Include="CHttpUrl.h" />
+    <ClInclude Include="CUrlParsingError.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

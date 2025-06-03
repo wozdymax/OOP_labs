@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{0a93d96e-9980-4b69-b0e9-60434697567c}</ProjectGuid>
-    <RootNamespace>ShapesTests</RootNamespace>
+    <ProjectGuid>{3550ef89-328a-4b17-ba1e-c65a9fe3762a}</ProjectGuid>
+    <RootNamespace>HttpUrlTests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -135,26 +135,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Shapes\CBaseShape.cpp" />
-    <ClCompile Include="..\Shapes\CCircle.cpp" />
-    <ClCompile Include="..\Shapes\CLineSegment.cpp" />
-    <ClCompile Include="..\Shapes\CPoint.cpp" />
-    <ClCompile Include="..\Shapes\CRectangle.cpp" />
-    <ClCompile Include="..\Shapes\CTriangle.cpp" />
-    <ClCompile Include="..\Shapes\ShapeController.cpp" />
-    <ClCompile Include="ShapesTests.cpp" />
+    <ClCompile Include="..\HttpUrl\CHttpUrl.cpp" />
+    <ClCompile Include="HttpUrlTests.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Shapes\CBaseShape.h" />
-    <ClInclude Include="..\Shapes\CCircle.h" />
-    <ClInclude Include="..\Shapes\CLineSegment.h" />
-    <ClInclude Include="..\Shapes\CPoint.h" />
-    <ClInclude Include="..\Shapes\CRectangle.h" />
-    <ClInclude Include="..\Shapes\CTriangle.h" />
-    <ClInclude Include="..\Shapes\IShape.h" />
-    <ClInclude Include="..\Shapes\ISolidShape.h" />
-    <ClInclude Include="..\Shapes\ShapeController.h" />
-    <ClInclude Include="..\Shapes\UtilityFunctions.h" />
+    <ClInclude Include="..\HttpUrl\CHttpUrl.h" />
+    <ClInclude Include="..\HttpUrl\CUrlParsingError.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

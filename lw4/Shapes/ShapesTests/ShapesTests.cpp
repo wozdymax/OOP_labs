@@ -6,6 +6,7 @@
 #include "../lw4/Shapes/Shapes/CTriangle.h"
 #include "../lw4/Shapes/Shapes/CRectangle.h"
 #include "../lw4/Shapes/Shapes/CCircle.h"
+#include "../lw4/Shapes/Shapes/ShapeController.h"
 
 const uint32_t OUTLINE_COLOR = 0xffffff;
 const uint32_t FILL_COLOR = 0xaaaaaa;
@@ -25,6 +26,20 @@ const CPoint INVLID_FIRST_POS = CPoint{ 0.0, 0.0 };
 const CPoint INVALID_SECOND_POSITION = CPoint{ 0.0, 4.0 };
 const CPoint INVALID_THIRD_POS = CPoint{ 0.0, 0.0 };
 
+const std::string INVALID_CIRCLE_INPUT = "circle 0 0.1 -3 ffffff aaaaaa";
+const std::string INVALID_TRIANGLE_INPUT = "triangle 1 1 2 2 3 3 ffffff aaaaaa";
+const std::string INVALID_RECTANGLE_INPUT = "rectangle 5 5 1 1 ffffff aaaaaa";
+const std::string INVALID_RADIUS_CIRCLE_INPUT = "circle 0 0.1 -3 ffffff aaaaaa";
+const std::string DEGENERATE_TRIANGLE_INPUT = "triangle 1 1 2 2 3 3 ffffff aaaaaa";
+const std::string INVALID_VERTEXES_RECTANGLE_INPUT = "rectangle 5 5 1 1 ffffff aaaaaa";
+const std::string INVALID_COLOR_SHAPE_INPUT = "rectangle 1 5 5 1 www222 123456";
+
+const std::string LINE_SEGMENT_TEST_COMPLETION_MSG = "Line segment was created successfully!\n";
+const std::string CIRCLE_TEST_COMPLETION_MSG = "Circle was created successfully!\n";
+const std::string TRIANGLE_TEST_COMPLETION_MSG = "Triangle was created successfully!\n";
+const std::string RECTANGLE_TEST_COMPLETION_MSG = "Rectangle was created successfully!\n";
+const std::string INVALID_SHAPES_TEST_COMPLETION_MSG = "Exception for invalid input shapes is finding!\n";
+
 TEST_CASE("Line segment tests")
 {
 	CLineSegment line(FIRST_POS, SECOND_POS, OUTLINE_COLOR);
@@ -40,6 +55,7 @@ TEST_CASE("Line segment tests")
 	CHECK(line.GetPerimeter() == LINE_SEGMENT_LENGTH);
 
 	CHECK(line.GetOutlineColor() == OUTLINE_COLOR);
+	std::cout << LINE_SEGMENT_TEST_COMPLETION_MSG;
 }
 
 TEST_CASE("Circle tests")
@@ -53,6 +69,7 @@ TEST_CASE("Circle tests")
 
 	CHECK(circle.GetFillColor() == FILL_COLOR);
 	CHECK(circle.GetOutlineColor() == OUTLINE_COLOR);
+	std::cout << CIRCLE_TEST_COMPLETION_MSG;
 }
 
 TEST_CASE("Triangle tests")
@@ -73,6 +90,7 @@ TEST_CASE("Triangle tests")
 
 	CHECK(triangle.GetFillColor() == FILL_COLOR);
 	CHECK(triangle.GetOutlineColor() == OUTLINE_COLOR);
+	std::cout << TRIANGLE_TEST_COMPLETION_MSG;
 }
 
 TEST_CASE("Rectangle tests")
@@ -92,5 +110,18 @@ TEST_CASE("Rectangle tests")
 
 	CHECK(rect.GetFillColor() == FILL_COLOR);
 	CHECK(rect.GetOutlineColor() == OUTLINE_COLOR);
+	std::cout << RECTANGLE_TEST_COMPLETION_MSG;
+}
+
+TEST_CASE("Invalid shapes")
+{
+	std::istringstream input("");
+	std::ostringstream output; 
+	ShapeController UI(input, output);
+	CHECK_THROWS_AS(UI.HandleUserInput(INVALID_RADIUS_CIRCLE_INPUT), std::invalid_argument);
+	CHECK_THROWS_AS(UI.HandleUserInput(DEGENERATE_TRIANGLE_INPUT), std::invalid_argument);
+	CHECK_THROWS_AS(UI.HandleUserInput(INVALID_VERTEXES_RECTANGLE_INPUT), std::invalid_argument);
+	CHECK_THROWS_AS(UI.HandleUserInput(INVALID_COLOR_SHAPE_INPUT), std::invalid_argument);
+	std::cout << INVALID_SHAPES_TEST_COMPLETION_MSG;
 }
 
